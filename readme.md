@@ -21,8 +21,26 @@ An **SQL Agent** is develop using LangChain, which can query the data in order t
 
 ## Running the App
 
-In case the frontend does not run, run `main.py`
+For Linux
+```
+git clone https://github.com/BlakkTyger/analytics-agentic-chatbot.git
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
+Then, run the following on different terminals:
+
+```
+streamlit run streamlit.py
 ```
 
 ```
+uvicorn Backend:app --reload
+```
+
+In case the frontend does not run due to platform issues or minor integration faults, perform the following steps to test the backend manually:
+
+1. In `data` directory, upload the desired csv files.
+2. In `main` function of `main.py`, alter the string variable `query` to add your query
+3. Run `main.py` 

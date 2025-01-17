@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from exp_3 import *
+from main import *
 import shutil
 import os
 from dotenv import load_dotenv

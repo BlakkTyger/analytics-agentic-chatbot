@@ -12,3 +12,5 @@ openai
 tabulate
 fastapi
 uvicorn
+streamlit
+pydantic
