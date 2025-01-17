@@ -7,7 +7,6 @@ from langchain_community.agent_toolkits import create_sql_agent
 from langchain_openai import ChatOpenAI
 from typing import List, Dict
 import glob
-
 load_dotenv()
 
 OPENAI_KEY = os.environ["OPENAI_KEY"]
@@ -79,8 +78,8 @@ class MultiDataFrameAgent:
         Returns:
             str: The query result
         """
-        # First, ensure all CSVs are loaded
-        self.load_all_csvs()
+        # # First, ensure all CSVs are loaded
+        # self.load_all_csvs()
         
         # Get relevant tables
         relevant_tables = self.get_relevant_tables(query)
