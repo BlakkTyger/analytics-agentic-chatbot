@@ -3,7 +3,7 @@ import pandas as pd
 import requests  # For calling the backend API
 import uuid  # For generating unique filenames
 # Streamlit app setup
-st.title("Simple Streamlit App")
+st.title("Analytics and Insights Agentic Chatbot")
 
 # Upload CSV file
 st.header("Upload a CSV File")
