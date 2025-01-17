@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests  # For calling the backend API
-
+import uuid  # For generating unique filenames
 # Streamlit app setup
 st.title("Simple Streamlit App")
 
@@ -15,6 +15,8 @@ if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
         st.write("Preview of Uploaded CSV:")
         st.write(df.head())
+        # Save the file to the data folder
+        df.to_csv(f"data/uploaded_file_{uuid()}.csv", index=False)
     except Exception as e:
         st.error(f"Error reading the file: {e}")
 

@@ -10,3 +10,5 @@ langgraph
 langsmith
 openai
 tabulate
+fastapi
+uvicorn
