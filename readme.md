@@ -19,3 +19,10 @@ An **SQL Agent** is develop using LangChain, which can query the data in order t
 - Solution can be **scaled** for large number of files and large tables, providing an industry standard solution.
 - Security can be ensured by integrating OpenLLMs in future.
 
+## Running the App
+
+In case the frontend does not run, run `main.py`
+
+```
+
+```
