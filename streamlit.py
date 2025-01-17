@@ -8,7 +8,7 @@ st.title("Simple Streamlit App")
 # Upload CSV file
 st.header("Upload a CSV File")
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
-
+backend_url = "http://localhost:8000"
 # Display uploaded CSV file
 if uploaded_file is not None:
     try:
@@ -16,7 +16,18 @@ if uploaded_file is not None:
         st.write("Preview of Uploaded CSV:")
         st.write(df.head())
         # Save the file to the data folder
-        df.to_csv(f"data/uploaded_file_{uuid()}.csv", index=False)
+        filePath = "data/uploaded_file_{uuid.uuid4()}.csv"
+        df.to_csv(filePath, index=False)
+        # Send the filename to the backend
+        
+        try:
+            response = requests.post(backend_url+"/api/upload_csv")
+            if response.status_code == 200:
+                st.success("Filename successfully sent to the backend.")
+            else:
+                st.error(f"Backend returned an error: {response.status_code}")
+        except Exception as e:
+            st.error(f"Error communicating with the backend: {e}")
     except Exception as e:
         st.error(f"Error reading the file: {e}")
 
@@ -31,10 +42,9 @@ if st.button("Send"):
     elif not user_query.strip():
         st.error("Please enter a query before sending.")
     else:
-        # Backend API call
-        backend_url = "http://your-backend-endpoint.com/api"  # Replace with your backend URL
+        # Backend API callL
         try:
-            response = requests.post(backend_url, json={"query": user_query})
+            response = requests.post(backend_url+"/api/query", json={"query": user_query})
             if response.status_code == 200:
                 st.success("Response from Backend:")
                 st.write(response.json())

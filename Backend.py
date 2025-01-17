@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 # Create the FastAPI app
 app = FastAPI()
 load_dotenv()
+from pydantic import BaseModel
 
 Dataframe =MultiDataFrameAgent("data")
 
@@ -15,7 +16,7 @@ def read_root():
     return {"message": "Welcome to the FastAPI app!"}
 
 @app.post("/api/upload_csv")
-def upload_csv(csv_path: str):
+def upload_csv():
     """
     Upload a CSV file to the backend and add it to the data folder.
     
@@ -29,17 +30,19 @@ def upload_csv(csv_path: str):
     
     return "CSV file uploaded and added to the data folder successfully."
 
+class QueryRequest(BaseModel):
+    query: str
+
 @app.post("/api/query")
-def query(query: str):
+def query(request: QueryRequest):
     """
     Query the loaded CSV files based on the user's query.
     
     Args:
-        query (str): User's query
+        request (QueryRequest): Request body containing the query
     
     Returns:
         List[str]: Relevant table names
     """
-    response = Dataframe.execute_query(query)
+    response = Dataframe.execute_query(request.query)
     return response
-
